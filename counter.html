@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+	<style>
+		body {
+			padding-top: 300px;
+			text-align: center;
+			background: #e8dfdf;
+			font-family: sans-serif;
+			font-weight: 100;
+		}
+
+
+		h1 {
+			color: rgb(0, 0, 0);
+			font-weight: 100;
+			font-size: 40px;
+			margin: 40px 0px 20px;
+		}
+
+		span.word {
+			color: rgb(255, 0, 0);
+			font-weight: 100;
+			font-size: 40px;
+			margin: 40px 0px 20px;
+		}
+
+		#clockdiv {
+			font-family: sans-serif;
+			color: #000000;
+			display: inline-block;
+			font-weight: 100;
+			text-align: center;
+			font-size: 30px;
+		}
+
+		#clockdiv>div {
+			padding: 10px;
+			border-radius: 3px;
+			background: #ffffff;
+			display: inline-block;
+		}
+
+		#clockdiv div>span {
+			padding: 15px;
+			border-radius: 3px;
+			background: #ff0000;
+			display: inline-block;
+		}
+
+
+		.smalltext {
+			padding-top: 5px;
+			font-size: 16px;
+		}
+	</style>
+</head>
+
+<body>
+
+
+	<h1> Draft <span class="word">Countdown</span></h1>
+	<div id="clockdiv">
+
+		<div>
+			<span class="hours" id="hour"></span>
+			<div class="smalltext">Hours</div>
+		</div>
+
+		<div><span class="minutes" id="minute"></span>
+			<div class="smalltext">Minutes</div>
+		</div>
+
+		<div><span class="seconds" id="second"></span>
+			<div class="smalltext">Seconds</div>
+		</div>
+	</div>
+	<p id="demo"></p>
+
+	<script>
+
+
+		let deadline = new Date(
+			"dec 30, 2023 10:22:10"
+		).getTime();
+
+
+		let x = setInterval(function () {
+
+			let now = new Date().getTime();
+
+
+			let t = deadline - now;
+			let hours = Math.floor(
+				(t % (1000 * 60 * 60 * 24)) /
+				(1000 * 60 * 60)
+			);
+			let minutes = Math.floor(
+				(t % (1000 * 60 * 60)) / (1000 * 60)
+			);
+			let seconds = Math.floor(
+				(t % (1000 * 60)) / 1000
+			);
+
+
+			document.getElementById("hour")
+				.innerHTML = hours;
+			document.getElementById("minute")
+				.innerHTML = minutes;
+			document.getElementById("second")
+				.innerHTML = seconds;
+
+
+			if (t < 0) {
+				clearInterval(x);
+
+
+				document.getElementById(
+					"hour"
+				).innerHTML = "0";
+				document.getElementById(
+					"minute"
+				).innerHTML = "0";
+				document.getElementById(
+					"second"
+				).innerHTML = "0";
+			}
+		}, 1000);
+
+	</script>
+</body>
+
+</html>
